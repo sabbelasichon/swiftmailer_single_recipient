@@ -63,4 +63,10 @@ class DebuggingTransportTest extends UnitTestCase
         $this->assertEquals([$firstMessage, $secondMessage], DebuggingTransport::getDeliveredMessages());
     }
 
+
+    protected function tearDown()
+    {
+        DebuggingTransport::reset();
+    }
+
 }

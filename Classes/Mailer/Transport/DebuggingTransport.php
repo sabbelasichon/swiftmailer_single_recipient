@@ -25,7 +25,7 @@ final class DebuggingTransport implements \Swift_Transport
     /**
      * Store sent messages for testing
      *
-     * @var array
+     * @var \Swift_Message[]
      */
     private static $deliveredMessages = [];
 
@@ -74,11 +74,19 @@ final class DebuggingTransport implements \Swift_Transport
     /**
      * Get delivered messages that were sent through this transport
      *
-     * @return array
+     * @return \Swift_Message[]
      */
     public static function getDeliveredMessages(): array
     {
         return self::$deliveredMessages;
+    }
+
+    /**
+     * Reset the status
+     */
+    public static function reset()
+    {
+        self::$deliveredMessages = [];
     }
 
     /**

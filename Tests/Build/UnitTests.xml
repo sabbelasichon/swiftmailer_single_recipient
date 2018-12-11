@@ -13,7 +13,7 @@
          strict="false"
          verbose="false">
     <testsuites>
-        <testsuite name="EXT:swiftmailer_single_recipient tests">
+        <testsuite name="swiftmailer_single_recipient tests">
             <directory>../Unit/</directory>
         </testsuite>
 
