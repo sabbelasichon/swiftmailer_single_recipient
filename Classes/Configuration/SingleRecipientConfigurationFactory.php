@@ -33,7 +33,7 @@ final class SingleRecipientConfigurationFactory implements SingletonInterface
 
     public function getConfiguration(): SingleRecipientConfiguration
     {
-        if ($this->configuration === null) {
+        if ( ! $this->configuration instanceof SingleRecipientConfiguration) {
             $this->configuration = new SingleRecipientConfiguration(
                 $this->transformListToEmailAddressArrayIfKeyExists('single_recipient'),
                 $this->transformListToEmailAddressArrayIfKeyExists('whitelist')
