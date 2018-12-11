@@ -39,7 +39,7 @@ class DebuggingTransportTest extends UnitTestCase
      */
     public function sendMailsReturnsCorrectCount()
     {
-        $message = $this->getMock(Swift_Mime_Message::class);
+        $message = $this->getMockBuilder(Swift_Mime_Message::class)->getMock();
         $message->method('getBcc')->willReturn('dummy@domain.com');
         $message->method('getCc')->willReturn('dummy@domain.com');
         $message->method('getTo')->willReturn('dummy@domain.com');
@@ -52,11 +52,11 @@ class DebuggingTransportTest extends UnitTestCase
      */
     public function correctRecipientsAreReturnedAfterSending()
     {
-        $firstMessage = $this->getMock(Swift_Mime_Message::class);
+        $firstMessage = $this->getMockBuilder(Swift_Mime_Message::class)->getMock();
         $firstMessage->method('getTo')->willReturn('dummy@domain.com');
         $this->subject->send($firstMessage);
 
-        $secondMessage = $this->getMock(Swift_Mime_Message::class);
+        $secondMessage = $this->getMockBuilder(Swift_Mime_Message::class)->getMock();
         $secondMessage->method('getTo')->willReturn('another@domain.com');
         $this->subject->send($secondMessage);
 
