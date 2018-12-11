@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -33,7 +33,7 @@ final class SingleRecipientConfigurationFactory implements SingletonInterface
 
     public function getConfiguration(): SingleRecipientConfiguration
     {
-        if ( ! $this->configuration instanceof SingleRecipientConfiguration) {
+        if (! $this->configuration instanceof SingleRecipientConfiguration) {
             $this->configuration = new SingleRecipientConfiguration(
                 $this->transformListToEmailAddressArrayIfKeyExists('single_recipient'),
                 $this->transformListToEmailAddressArrayIfKeyExists('whitelist')
