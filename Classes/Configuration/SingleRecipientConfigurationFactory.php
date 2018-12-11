@@ -34,34 +34,26 @@ final class SingleRecipientConfigurationFactory implements SingletonInterface
     public function getConfiguration(): SingleRecipientConfiguration
     {
         if ($this->configuration === null) {
-            $singleRecipients = [];
-
-            if (isset($this->extensionConfiguration['single_recipient'])) {
-                try {
-                    $singleRecipients = $this->transformListToEmailAddressArray($this->extensionConfiguration['single_recipient']);
-                } catch (\InvalidArgumentException $e) {
-                }
-            }
-
-            $whitelist = [];
-
-            if (isset($this->extensionConfiguration['whitelist'])) {
-                try {
-                    $whitelist = $this->transformListToEmailAddressArray($this->extensionConfiguration['whitelist']);
-                } catch (\InvalidArgumentException $e) {
-                }
-            }
-
-            $this->configuration = new SingleRecipientConfiguration($singleRecipients, $whitelist);
+            $this->configuration = new SingleRecipientConfiguration(
+                $this->transformListToEmailAddressArrayIfKeyExists('single_recipient'),
+                $this->transformListToEmailAddressArrayIfKeyExists('whitelist')
+            );
         }
 
         return $this->configuration;
     }
 
-    private function transformListToEmailAddressArray(string $listOfEmails): array
+    private function transformListToEmailAddressArrayIfKeyExists(string $key): array
     {
-        return array_map(function ($email) {
-            return new EmailAddress($email);
-        }, GeneralUtility::trimExplode(',', $listOfEmails));
+        if (isset($this->extensionConfiguration[$key])) {
+            try {
+                return array_map(function ($email) {
+                    return new EmailAddress($email);
+                }, GeneralUtility::trimExplode(',', $this->extensionConfiguration[$key]));
+            } catch (\InvalidArgumentException $e) {
+            }
+        }
+
+        return [];
     }
 }
