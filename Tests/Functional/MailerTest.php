@@ -1,6 +1,5 @@
 <?php
-declare(strict_types=1);
-
+declare(strict_types = 1);
 
 namespace Ssch\SwiftmailerSingleRecipient\Tests\Functional;
 
@@ -24,19 +23,18 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 final class MailerTest extends FunctionalTestCase
 {
-
     protected $testExtensionsToLoad = ['typo3conf/ext/swiftmailer_single_recipient'];
 
     private $mailer;
 
     protected function setUp()
     {
+        parent::setUp();
+
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = DebuggingTransport::class;
         $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['swiftmailer_single_recipient'] = serialize([
             'single_recipient' => 'dummy@domain.com',
         ]);
-        parent::setUp();
-
 
         $this->mailer = GeneralUtility::makeInstance(Mailer::class);
     }
@@ -52,11 +50,10 @@ final class MailerTest extends FunctionalTestCase
 
         $sendMessages = DebuggingTransport::getDeliveredMessages();
         foreach ($sendMessages as $sendMessage) {
-            $this->assertEquals('dummy@domain.com', $sendMessage->getTo());
-            $this->assertEquals('real@email.com', $sendMessage->getHeaders()->get('X-Swift-To'));
+            $this->assertEquals(['dummy@domain.com' => null], $sendMessage->getTo());
+            $this->assertTrue($sendMessage->getHeaders()->has('X-Swift-To'));
         }
     }
-
 
     protected function tearDown()
     {

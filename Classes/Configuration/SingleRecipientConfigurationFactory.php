@@ -45,7 +45,7 @@ final class SingleRecipientConfigurationFactory implements SingletonInterface
 
     private function transformListToEmailAddressArrayIfKeyExists(string $key): array
     {
-        if (isset($this->extensionConfiguration[$key])) {
+        if (array_key_exists($key, $this->extensionConfiguration) && $this->extensionConfiguration[$key] !== '') {
             try {
                 return array_map(function ($email) {
                     return new EmailAddress($email);

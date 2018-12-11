@@ -44,6 +44,32 @@ class SingleRecipientConfigurationFactoryTest extends UnitTestCase
     /**
      * @test
      */
+    public function isValidConfigurationViaGlobals()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['swiftmailer_single_recipient'] = serialize([
+            'single_recipient' => 'dummy@domain.com',
+        ]);
+        $configurationFactory = new SingleRecipientConfigurationFactory();
+        $configuration = $configurationFactory->getConfiguration();
+        $this->assertTrue($configuration->isValid());
+    }
+
+    /**
+     * @test
+     */
+    public function isInValidConfigurationViaGlobals()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['swiftmailer_single_recipient'] = serialize([
+            'single_recipient' => '',
+        ]);
+        $configurationFactory = new SingleRecipientConfigurationFactory();
+        $configuration = $configurationFactory->getConfiguration();
+        $this->assertFalse($configuration->isValid());
+    }
+
+    /**
+     * @test
+     */
     public function isInvalidConfigurationDueToEmptySingleRecipient()
     {
         $configurationFactory = new SingleRecipientConfigurationFactory([]);

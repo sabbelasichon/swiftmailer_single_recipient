@@ -27,12 +27,10 @@ class DebuggingTransportTest extends UnitTestCase
      */
     private $subject;
 
-
     protected function setUp()
     {
         $this->subject = new DebuggingTransport();
     }
-
 
     /**
      * @test
@@ -45,7 +43,6 @@ class DebuggingTransportTest extends UnitTestCase
         $message->method('getTo')->willReturn('dummy@domain.com');
         $this->assertEquals(3, $this->subject->send($message));
     }
-
 
     /**
      * @test
@@ -63,10 +60,8 @@ class DebuggingTransportTest extends UnitTestCase
         $this->assertEquals([$firstMessage, $secondMessage], DebuggingTransport::getDeliveredMessages());
     }
 
-
     protected function tearDown()
     {
         DebuggingTransport::reset();
     }
-
 }

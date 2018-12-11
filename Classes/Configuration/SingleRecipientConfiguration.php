@@ -46,11 +46,15 @@ final class SingleRecipientConfiguration
 
     public function getSingleRecipients(): array
     {
-        return $this->singleRecipients;
+        return array_map(function (EmailAddress $emailAddress) {
+            return (string)$emailAddress;
+        }, $this->singleRecipients);
     }
 
     public function getWhitelist(): array
     {
-        return $this->whitelist;
+        return array_map(function (EmailAddress $emailAddress) {
+            return (string)$emailAddress;
+        }, $this->whitelist);
     }
 }
