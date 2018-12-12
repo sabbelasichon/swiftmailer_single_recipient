@@ -1,5 +1,5 @@
-# cat=mailer; type=string; label=Single recipient
+# cat=mailer; type=string; label=Comma separated list of email address(es) which are receiving all (with some exceptions) emails
 single_recipient =
 
-# cat=mailer; type=string; label=Comma separated list of email address which are receiving an email
+# cat=mailer; type=string; label=Comma separated list of email address(es) which are really receiving an email
 whitelist =
