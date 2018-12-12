@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Ssch\SwiftmailerSingleRecipient\Aspect;
+namespace Ssch\SwiftmailerSingleRecipient\Mailer\Plugins;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -16,20 +16,16 @@ namespace Ssch\SwiftmailerSingleRecipient\Aspect;
  * The TYPO3 project - inspiring people to share!
  */
 
-use Ssch\SwiftmailerSingleRecipient\Mailer\SingleRecipientPluginFactory;
-use TYPO3\CMS\Core\Mail\Mailer;
+use Swift_Events_SendEvent;
+use Swift_Events_SendListener;
 
-final class SingleRecipientAspect
+final class NullPlugin implements Swift_Events_SendListener
 {
-    private $plugin;
-
-    public function __construct(SingleRecipientPluginFactory $singleRecipientPluginFactory)
+    public function beforeSendPerformed(Swift_Events_SendEvent $evt)
     {
-        $this->plugin = $singleRecipientPluginFactory->getPlugin();
     }
 
-    public function handle(Mailer $mailer)
+    public function sendPerformed(Swift_Events_SendEvent $evt)
     {
-        $mailer->registerPlugin($this->plugin);
     }
 }
