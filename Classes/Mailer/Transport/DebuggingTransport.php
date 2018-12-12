@@ -27,68 +27,38 @@ final class DebuggingTransport implements \Swift_Transport
     /**
      * Store sent messages for testing
      *
-     * @var \Swift_Message[]
+     * @var \Swift_Message[]|\Swift_Mime_Message[]
      */
     private static $deliveredMessages = [];
 
-    /**
-     * @var \Swift_Events_SimpleEventDispatcher
-     */
     private $eventDispatcher;
 
     private $options;
 
-    /**
-     * Constructor.
-     *
-     * @param array $options
-     *
-     * @throws \Swift_DependencyException
-     */
     public function __construct(array $options = [])
     {
         $this->options = $options;
         $this->eventDispatcher = Swift_DependencyContainer::getInstance()->lookup('transport.eventdispatcher');
     }
 
-    /**
-     * Test if this Transport mechanism has started.
-     *
-     * @return bool
-     */
     public function isStarted(): bool
     {
         return true;
     }
 
-    /**
-     * Start this Transport mechanism.
-     */
     public function start()
     {
     }
 
-    /**
-     * Stop this Transport mechanism.
-     */
     public function stop()
     {
     }
 
-    /**
-     * Send the given Message.
-     *
-     * Recipient/sender data will be retrieved from the Message API.
-     * The return value is the number of recipients who were accepted for delivery.
-     *
-     * @param Swift_Mime_Message $message
-     * @param string[] $failedRecipients An array of failures by-reference
-     *
-     * @return int
-     */
     public function send(Swift_Mime_Message $message, &$failedRecipients = null): int
     {
-        if ($evt = $this->eventDispatcher->createSendEvent($this, $message)) {
+        $evt = $this->eventDispatcher->createSendEvent($this, $message);
+
+        if ($evt instanceof Swift_Events_SendEvent) {
             $this->eventDispatcher->dispatchEvent($evt, 'beforeSendPerformed');
             if ($evt->bubbleCancelled()) {
                 return 0;
@@ -97,7 +67,7 @@ final class DebuggingTransport implements \Swift_Transport
 
         self::$deliveredMessages[] = clone $message;
 
-        if ($evt) {
+        if ($evt instanceof Swift_Events_SendEvent) {
             $evt->setResult(Swift_Events_SendEvent::RESULT_SUCCESS);
             $this->eventDispatcher->dispatchEvent($evt, 'sendPerformed');
         }
@@ -105,37 +75,21 @@ final class DebuggingTransport implements \Swift_Transport
         return \count((array)$message->getTo()) + \count((array)$message->getCc()) + \count((array)$message->getBcc());
     }
 
-    /**
-     * Get delivered messages that were sent through this transport
-     *
-     * @return \Swift_Message[]
-     */
     public static function getDeliveredMessages(): array
     {
         return self::$deliveredMessages;
     }
 
-    /**
-     * Reset the status
-     */
     public static function reset()
     {
         self::$deliveredMessages = [];
     }
 
-    /**
-     * @return array
-     */
     public function getOptions(): array
     {
         return $this->options;
     }
 
-    /**
-     * Register a plugin in the Transport.
-     *
-     * @param Swift_Events_EventListener $plugin
-     */
     public function registerPlugin(Swift_Events_EventListener $plugin)
     {
         $this->eventDispatcher->bindEventListener($plugin);
