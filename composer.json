@@ -24,7 +24,7 @@
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.0",
     "nimut/testing-framework": "^1.0 || ^2.0 || ^3.0 || ^4.0",
-    "phpstan/phpstan": "^0.10.6"
+    "phpstan/phpstan": "^0.9 || ^0.10"
   },
   "replace": {
     "swiftmailer_single_recipient": "self.version",
