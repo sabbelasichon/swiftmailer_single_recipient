@@ -67,6 +67,17 @@ class SingleRecipientConfigurationFactoryTest extends UnitTestCase
         $this->assertFalse($configuration->isValid());
     }
 
+
+    /**
+     * @test
+     */
+    public function emptyConfigurationIsInValid()
+    {
+        $configurationFactory = new SingleRecipientConfigurationFactory();
+        $configuration = $configurationFactory->getConfiguration();
+        $this->assertFalse($configuration->isValid());
+    }
+
     /**
      * @test
      */

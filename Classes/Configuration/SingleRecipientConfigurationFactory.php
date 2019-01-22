@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -28,12 +28,18 @@ final class SingleRecipientConfigurationFactory implements SingletonInterface
 
     public function __construct(array $extensionConfiguration = null)
     {
-        $this->extensionConfiguration = $extensionConfiguration ?? unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['swiftmailer_single_recipient']);
+        if (\is_array($extensionConfiguration)) {
+            $this->extensionConfiguration = $extensionConfiguration;
+        } elseif (isset($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['swiftmailer_single_recipient'])) {
+            $this->extensionConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['swiftmailer_single_recipient']);
+        } else {
+            $this->extensionConfiguration = [];
+        }
     }
 
     public function getConfiguration(): SingleRecipientConfiguration
     {
-        if (! $this->configuration instanceof SingleRecipientConfiguration) {
+        if ( ! $this->configuration instanceof SingleRecipientConfiguration) {
             $this->configuration = new SingleRecipientConfiguration(
                 $this->transformListToEmailAddressArrayIfKeyExists('single_recipient'),
                 $this->transformListToEmailAddressArrayIfKeyExists('whitelist')
