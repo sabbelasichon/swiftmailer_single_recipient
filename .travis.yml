@@ -20,6 +20,9 @@ matrix:
 
 sudo: false
 
+services:
+  - mysql
+
 addons:
   apt:
     packages:

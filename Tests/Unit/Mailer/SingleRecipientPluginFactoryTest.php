@@ -21,6 +21,9 @@ use Ssch\SwiftmailerSingleRecipient\Configuration\SingleRecipientConfigurationFa
 use Ssch\SwiftmailerSingleRecipient\Mailer\Plugins\NullPlugin;
 use Ssch\SwiftmailerSingleRecipient\Mailer\SingleRecipientPluginFactory;
 
+/**
+ * @covers \Ssch\SwiftmailerSingleRecipient\Mailer\SingleRecipientPluginFactory
+ */
 class SingleRecipientPluginFactoryTest extends UnitTestCase
 {
     /**

@@ -18,6 +18,9 @@ namespace Ssch\SwiftmailerSingleRecipient\Tests\Unit\ValueObject;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use Ssch\SwiftmailerSingleRecipient\ValueObject\EmailAddress;
 
+/**
+ * @covers \Ssch\SwiftmailerSingleRecipient\ValueObject\EmailAddress
+ */
 class EmailAddressTest extends UnitTestCase
 {
 

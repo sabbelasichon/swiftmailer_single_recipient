@@ -18,6 +18,9 @@ namespace Ssch\SwiftmailerSingleRecipient\Tests\Unit\Configuration;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use Ssch\SwiftmailerSingleRecipient\Configuration\SingleRecipientConfigurationFactory;
 
+/**
+ * @covers \Ssch\SwiftmailerSingleRecipient\Configuration\SingleRecipientConfigurationFactory
+ */
 class SingleRecipientConfigurationFactoryTest extends UnitTestCase
 {
 

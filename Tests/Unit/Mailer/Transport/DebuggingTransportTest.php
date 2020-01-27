@@ -19,6 +19,9 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use Ssch\SwiftmailerSingleRecipient\Mailer\Transport\DebuggingTransport;
 use Swift_Mime_Message;
 
+/**
+ * @covers \Ssch\SwiftmailerSingleRecipient\Mailer\Transport\DebuggingTransport
+ */
 class DebuggingTransportTest extends UnitTestCase
 {
 

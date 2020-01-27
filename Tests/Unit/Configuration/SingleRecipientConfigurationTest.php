@@ -19,6 +19,9 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use Ssch\SwiftmailerSingleRecipient\Configuration\SingleRecipientConfiguration;
 use Ssch\SwiftmailerSingleRecipient\ValueObject\EmailAddress;
 
+/**
+ * @covers \Ssch\SwiftmailerSingleRecipient\Configuration\SingleRecipientConfiguration
+ */
 class SingleRecipientConfigurationTest extends UnitTestCase
 {
 
