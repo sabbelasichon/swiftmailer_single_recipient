@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -20,10 +20,19 @@ use Ssch\SwiftmailerSingleRecipient\ValueObject\EmailAddress;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-final class SingleRecipientConfigurationFactory implements SingletonInterface
+/**
+ * @final
+ */
+class SingleRecipientConfigurationFactory implements SingletonInterface
 {
+    /**
+     * @var SingleRecipientConfiguration
+     */
     private $configuration;
 
+    /**
+     * @var array
+     */
     private $extensionConfiguration;
 
     public function __construct(array $extensionConfiguration = null)
@@ -39,7 +48,7 @@ final class SingleRecipientConfigurationFactory implements SingletonInterface
 
     public function getConfiguration(): SingleRecipientConfiguration
     {
-        if ( ! $this->configuration instanceof SingleRecipientConfiguration) {
+        if (! $this->configuration instanceof SingleRecipientConfiguration) {
             $this->configuration = new SingleRecipientConfiguration(
                 $this->transformListToEmailAddressArrayIfKeyExists('single_recipient'),
                 $this->transformListToEmailAddressArrayIfKeyExists('whitelist')
@@ -53,7 +62,7 @@ final class SingleRecipientConfigurationFactory implements SingletonInterface
     {
         if (array_key_exists($key, $this->extensionConfiguration) && $this->extensionConfiguration[$key] !== '') {
             try {
-                return array_map(function ($email) {
+                return array_map(static function ($email) {
                     return new EmailAddress($email);
                 }, GeneralUtility::trimExplode(',', $this->extensionConfiguration[$key]));
             } catch (\InvalidArgumentException $e) {

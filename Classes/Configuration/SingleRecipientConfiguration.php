@@ -19,10 +19,19 @@ namespace Ssch\SwiftmailerSingleRecipient\Configuration;
 use Ssch\SwiftmailerSingleRecipient\ValueObject\EmailAddress;
 use Webmozart\Assert\Assert;
 
-final class SingleRecipientConfiguration
+/**
+ * @final
+ */
+class SingleRecipientConfiguration
 {
+    /**
+     * @var array|EmailAddress[]
+     */
     private $singleRecipients;
 
+    /**
+     * @var array|EmailAddress[]
+     */
     private $whitelist;
 
     /**
@@ -46,14 +55,14 @@ final class SingleRecipientConfiguration
 
     public function getSingleRecipients(): array
     {
-        return array_map(function (EmailAddress $emailAddress) {
+        return array_map(static function (EmailAddress $emailAddress) {
             return (string)$emailAddress;
         }, $this->singleRecipients);
     }
 
     public function getWhitelist(): array
     {
-        return array_map(function (EmailAddress $emailAddress) {
+        return array_map(static function (EmailAddress $emailAddress) {
             return (string)$emailAddress;
         }, $this->whitelist);
     }

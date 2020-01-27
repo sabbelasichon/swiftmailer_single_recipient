@@ -67,7 +67,6 @@ class SingleRecipientConfigurationFactoryTest extends UnitTestCase
         $this->assertFalse($configuration->isValid());
     }
 
-
     /**
      * @test
      */

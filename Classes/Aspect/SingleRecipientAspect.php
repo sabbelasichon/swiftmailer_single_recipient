@@ -21,6 +21,9 @@ use TYPO3\CMS\Core\Mail\Mailer;
 
 final class SingleRecipientAspect
 {
+    /**
+     * @var \Swift_Events_SendListener
+     */
     private $plugin;
 
     public function __construct(SingleRecipientPluginFactory $singleRecipientPluginFactory)

@@ -16,6 +16,7 @@ namespace Ssch\SwiftmailerSingleRecipient\Mailer;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Ssch\SwiftmailerSingleRecipient\Configuration\SingleRecipientConfiguration;
 use Ssch\SwiftmailerSingleRecipient\Configuration\SingleRecipientConfigurationFactory;
 use Ssch\SwiftmailerSingleRecipient\Mailer\Plugins\NullPlugin;
 use Swift_Events_SendListener;
@@ -23,6 +24,9 @@ use Swift_Plugins_RedirectingPlugin;
 
 final class SingleRecipientPluginFactory
 {
+    /**
+     * @var SingleRecipientConfiguration
+     */
     private $configuration;
 
     public function __construct(SingleRecipientConfigurationFactory $factory)

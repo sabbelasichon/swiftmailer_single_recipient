@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/sabbelasichon/swiftmailer_single_recipient.png)](https://travis-ci.org/sabbelasichon/swiftmailer_single_recipient)
+[![Build Status](https://img.shields.io/travis/sabbelasichon/swiftmailer_single_recipient/master.svg?style=flat-square)](https://travis-ci.org/sabbelasichon/swiftmailer_single_recipient)
+[![Coverage Status](https://img.shields.io/coveralls/sabbelasichon/swiftmailer_single_recipient/master.svg?style=flat-square)](https://coveralls.io/github/sabbelasichon/swiftmailer_single_recipient?branch=master)
 
 How to Work with Emails during Development
 ==========================================
