@@ -20,10 +20,7 @@ use InvalidArgumentException;
 
 final class EmailAddress
 {
-    /**
-     * @var string
-     */
-    private $email;
+    private string $email;
 
     public function __construct(string $email)
     {

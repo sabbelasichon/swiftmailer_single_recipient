@@ -22,17 +22,11 @@ use Webmozart\Assert\Assert;
 /**
  * @final
  */
-class SingleRecipientConfiguration
+final class SingleRecipientConfiguration
 {
-    /**
-     * @var array|EmailAddress[]
-     */
-    private $singleRecipients;
+    private array $singleRecipients = [];
 
-    /**
-     * @var array|EmailAddress[]
-     */
-    private $whitelist;
+    private array $whitelist = [];
 
     /**
      * SingleRecipientConfiguration constructor.
